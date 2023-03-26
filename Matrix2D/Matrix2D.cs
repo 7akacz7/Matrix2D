@@ -25,7 +25,7 @@ namespace MatrixLib
 
         public bool Equals(Matrix2D? other)
         {
-            if (other == null) return false;
+            if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
 
             return A == other.A && B == other.B && C == other.C && D == other.D;
@@ -42,14 +42,50 @@ namespace MatrixLib
         public override int GetHashCode() => HashCode.Combine(A, B, C, D);
         public static bool operator == (Matrix2D? left, Matrix2D? right)
         {
-            if (left == null && right == null) return true;
-            if (left == null) return false;
+            if (left is null && right is null) return true;
+            if (left is null) return false;
             return left.Equals(right);
         }
         public static bool operator != (Matrix2D? left, Matrix2D? right)
         {
             return !(left==right);
         }
+       /*
+       public readonly struct Fraction
+        {
+            private readonly int A;
+            private readonly int B;
 
+            public Fraction(int a, int b)
+            {
+                
+                A = a;
+                B = b;
+            }
+
+            public static Fraction operator +(Fraction a) => a;
+            public static Fraction operator -(Fraction a) => new Fraction(-a.A, a.B);
+
+            public static Fraction operator +(Fraction a, Fraction b)
+                => new Fraction(a.A * b.B + b.A * a.B, a.A * b.B);
+
+            public static Fraction operator -(Fraction a, Fraction b)
+                => a + (-b);
+
+            public static Fraction operator *(Fraction a, Fraction b)
+                => new Fraction(a.A * b.A, a.B * b.B);
+
+            public static Fraction operator /(Fraction a, Fraction b)
+            {
+                if (b.A == 0)
+                {
+                    throw new DivideByZeroException();
+                }
+                return new Fraction(a.A * b.B, a.B * b.A);
+            }
+
+            public override string ToString() => $"{A} / {B}";
+        }
+       */
     }
 }
